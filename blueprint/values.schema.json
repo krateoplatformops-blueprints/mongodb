@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "properties": {
+    "mongodb": {
+      "additionalProperties": false,
+      "description": "MongoDB (via MongoDB Operator) configuration",
+      "properties": {
+        "instance": {
+          "additionalProperties": false,
+          "description": "List of MongoDB clusters to create",
+          "properties": {
+            "clusterName": {
+              "default": "mongodb-one",
+              "description": "Cluster name",
+              "title": "clusterName",
+              "type": "string"
+            },
+            "opsManager": {
+              "additionalProperties": false,
+              "description": "MongoDB Ops Manager/ReplicaSet configuration",
+              "properties": {
+                "members": {
+                  "default": 3,
+                  "description": "Number of replica set members",
+                  "minimum": 1,
+                  "title": "members",
+                  "type": "integer"
+                },
+                "replicas": {
+                  "default": 1,
+                  "description": "Number of Ops Manager pods",
+                  "minimum": 1,
+                  "title": "replicas",
+                  "type": "integer"
+                },
+                "version": {
+                  "default": "8.0.0",
+                  "description": "Ops Manager version",
+                  "title": "version",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "replicas",
+                "members",
+                "version"
+              ],
+              "title": "opsManager",
+              "type": "object"
+            },
+            "password": {
+              "default": "",
+              "description": "Admin/database password; if empty, a random 16-char password will be generated",
+              "title": "password",
+              "type": "string"
+            },
+            "replicas": {
+              "default": 1,
+              "description": "Number of MongoDB replicas",
+              "minimum": 1,
+              "title": "replicas",
+              "type": "integer"
+            },
+            "storageSize": {
+              "default": "2Gi",
+              "description": "Persistent storage request size",
+              "pattern": "^[0-9]+Gi$",
+              "title": "storageSize",
+              "type": "string"
+            },
+            "username": {
+              "default": "myuser",
+              "description": "Admin/database username to create",
+              "title": "username",
+              "type": "string"
+            },
+            "version": {
+              "default": "8.0.0",
+              "description": "MongoDB version",
+              "title": "version",
+              "type": "string"
+            }
+          },
+          "title": "instance",
+          "type": "object"
+        }
+      },
+      "title": "mongodb",
+      "type": "object"
+    }
+  },
+  "type": "object"
+}
